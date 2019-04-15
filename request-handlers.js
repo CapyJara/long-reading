@@ -1,6 +1,6 @@
-const exec = require('child_process').exec;
+const querystring = require('querystring');
 
-function start(response) {
+function start(response, postData) {
   console.log('Request handle \'start\' was called.');
  
   var body = '<html>' +
@@ -22,10 +22,11 @@ function start(response) {
 }
 
 
-function upload(response) {
+function upload(response, postData) {
   console.log('Request handler \'upload\' was called.');
   response.writeHead(200, { 'Content-Type': 'text/plain' });
-  response.write('Hello Upload');
+  response.write('You\'ve sent ' + postData);
+  querystring.parse((postData).text);
   response.end();
 }
 
